@@ -25,14 +25,25 @@ public class SwitchingSectionsConstructorIsWorksTest {
     }
 
     @Test
-    @DisplayName("Работают переходы к разделам: Булки, Соусы, Начинки")
-    public void switchingSectionsConstructorIsWorksTest() throws InterruptedException {
-        constructorPage.clickTabFillings();
-        constructorPage.checkHeaderFillingsIsVisible();
-        constructorPage.clickTabSauces();
-        constructorPage.checkHeaderSaucesIsVisible();
-        constructorPage.clickTabBun();
-        constructorPage.checkHeaderBunIsVisible();
+    @DisplayName("Работает переход к разделу \"Булки\"")
+    public void switchingSectionBunsConstructorIsWorksTest() throws InterruptedException {
+        constructorPage.clickTabIngredientTypeName("Соусы");
+        constructorPage.clickTabIngredientTypeName("Булки");
+        constructorPage.checkHeaderIngredientTypeIsVisible("Булки");
+    }
+
+    @Test
+    @DisplayName("Работает переход к разделу \"Соусы\"")
+    public void switchingSectionSaucesConstructorIsWorksTest() throws InterruptedException {
+        constructorPage.clickTabIngredientTypeName("Соусы");
+        constructorPage.checkHeaderIngredientTypeIsVisible("Соусы");
+    }
+
+    @Test
+    @DisplayName("Работает переход к разделу \"Начинки\"")
+    public void switchingSectionFillingsConstructorIsWorksTest() throws InterruptedException {
+        constructorPage.clickTabIngredientTypeName("Начинки");
+        constructorPage.checkHeaderIngredientTypeIsVisible("Начинки");
     }
 
     @After

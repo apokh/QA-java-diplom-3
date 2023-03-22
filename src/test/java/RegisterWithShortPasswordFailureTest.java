@@ -1,6 +1,7 @@
 import api.StepsUser;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
+import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,6 +26,10 @@ public class RegisterWithShortPasswordFailureTest {
         registerPage.enterPassword("12345");
         registerPage.clickGoRegisterButton();
         registerPage.checkLabelPasswordErrorIsDisplayed();
+    }
+
+    @After
+    public void closeApp() {
         driver.close();
     }
 }

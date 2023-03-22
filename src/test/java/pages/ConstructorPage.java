@@ -1,7 +1,9 @@
 package pages;
 
 import io.qameta.allure.Step;
+import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 
 public class ConstructorPage {
@@ -13,23 +15,8 @@ public class ConstructorPage {
     //    заголовок "Соберите бургер"
     private By headerConstructBurger = By.xpath(".//h1[text() = 'Соберите бургер']");
 
-    //    кнопка "Булки" на главной
-    private By tabBun = By.xpath(".//span[text() = 'Булки']");
-
-    //    кнопка "Соусы" на главной
-    private By tabSauces = By.xpath(".//span[text() = 'Соусы']");
-
-    //    кнопка "Начинки" на главной
-    private By tabFillings = By.xpath(".//span[text() = 'Начинки']");
-
-    //    заголовок раздела "Булки" на главной
-    private By headerBun = By.xpath(".//h2[text() = 'Булки']");
-
-    //    заголовок раздела "Соусы" на главной
-    private By headerSauces = By.xpath(".//h2[text() = 'Соусы']");
-
-    //    заголовок раздела "Начинки" на главной
-    private By headerFillings = By.xpath(".//h2[text() = 'Начинки']");
+    //    блок с ингредиентами (булки, соусы, начинки)
+    private By divIngredients = By.xpath(".//h2[text() = 'Булки']/..");
 
 
     public ConstructorPage(WebDriver driver) {this.driver = driver;}
@@ -46,35 +33,17 @@ public class ConstructorPage {
     }
 
     @Step
-    public void clickTabBun() throws InterruptedException {
-        driver.findElement(tabBun).click();
+    public void clickTabIngredientTypeName(String ingredientTypeName) throws InterruptedException {
+        By tabIngredientTypeName = By.xpath(".//span[text() = '" + ingredientTypeName + "']");
+        driver.findElement(tabIngredientTypeName).click();
         Thread.sleep(2000);
     }
 
     @Step
-    public void clickTabSauces() throws InterruptedException {
-        driver.findElement(tabSauces).click();
-        Thread.sleep(2000);
-    }
-
-    @Step
-    public void clickTabFillings() throws InterruptedException {
-        driver.findElement(tabFillings).click();
-        Thread.sleep(2000);
-    }
-
-    @Step
-    public void checkHeaderBunIsVisible() {
-        driver.findElement(headerBun).isDisplayed();
-    }
-
-    @Step
-    public void checkHeaderSaucesIsVisible() {
-        driver.findElement(headerSauces).isDisplayed();
-    }
-
-    @Step
-    public void checkHeaderFillingsIsVisible() {
-        driver.findElement(headerFillings).isDisplayed();
+    public void checkHeaderIngredientTypeIsVisible(String ingredientTypeName) {
+        By headerIngredientTypeSection = By.xpath(".//h2[text() = '" + ingredientTypeName + "']");
+        Point divLocation = driver.findElement(divIngredients).getLocation();
+        Point sectionLocation = driver.findElement(headerIngredientTypeSection).getLocation();
+        Assert.assertEquals(divLocation, sectionLocation);
     }
 }
